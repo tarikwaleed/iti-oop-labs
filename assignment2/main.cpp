@@ -1,20 +1,16 @@
-#include<iostream>
-#include "fraction.cpp"
+#include "fraction.h"
+#include <iostream>
 using namespace std;
-int main(int argc, char const *argv[])
-{
-    Fraction f1=Fraction(1,4);
-    Fraction f2=Fraction(3,4);
-    f1.Display();
-    f2.Display();
-    Fraction f3=f1.AddTo(f2);
-    f3.Display();
-    Fraction f4=f2.AddTo(f1);
-    f4.Display();
+int main(int argc, char const *argv[]) {
+  // two ways of object creattion in c++
+  Fraction f2(1, 2);
+  Fraction f4=f2+5;
+  f4.Display();
+  Fraction f5=5+f4;
+
+  
 
 
-    
 
-
-    return 0;
+  return 0;
 }
