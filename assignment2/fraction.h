@@ -2,7 +2,6 @@
 #define FRACTION_H
 
 #include <iostream>
-using namespace std;
 class Fraction {
 private:
   int numerator;
@@ -15,6 +14,9 @@ public:
     SetNumerator(numerator);
     SetDenominator(denominator);
     values = new int[10];
+    for (int i = 0; i < 10; i++) {
+      this->values[i] = i * 10;
+    }
   }
   // Getters and Setters
   int GetNumerator() {
@@ -32,7 +34,11 @@ public:
   }
   // Methods
   void Display() {
-    std::cout << "Thre Fraction is " << numerator << "/" << denominator << endl;
+    std::cout << "The Fraction is " << numerator << "/" << denominator << std::endl;
+    std::cout << "And its values are: " << std::endl;
+    for (int i = 0; i < 10; i++) {
+      std::cout << "Value " << i << ":" << this->values[i] << std::endl;
+    }
   }
   Fraction AddTo(Fraction other) {
     int newDenominator = denominator * other.denominator;
@@ -68,17 +74,34 @@ public:
     int newDenomirator = this->denominator;
     return Fraction(newNumerator, newDenomirator);
   }
+  int &operator[](int index) {
+    if (index > 9) {
+      std::cout << "Index out of range" << std::endl;
+      exit(0);
+    }
+    return values[index];
+  }
+
   /*
   to be able to do f2=5+f2;
   first argument is what's left of the operand
   second argument is what's right of the operand
   */
- friend Fraction operator+(int x,Fraction f);
+  friend Fraction operator+(int x, Fraction f);
+  friend std::ostream &operator<<(std::ostream &stream, const Fraction &fraction);
 };
-Fraction operator+(int x,Fraction f){
-    int newNumerator = f.numerator + x;
-    int newDenomirator = f.denominator;
-    return Fraction(newNumerator, newDenomirator);
+Fraction operator+(int x, Fraction f) {
+  int newNumerator = f.numerator + x;
+  int newDenomirator = f.denominator;
+  return Fraction(newNumerator, newDenomirator);
+}
+std::ostream &operator<<(std::ostream &stream, const Fraction &fraction) {
+  stream << "The Fraction is:" << fraction.numerator << "/" << fraction.denominator;
+  std::cout << "And its values are: " << std::endl;
+  for (int i = 0; i < 10; i++) {
+    std::cout << "Value " << i << ":" << fraction.values[i] << std::endl;
+  }
+  return stream;
 }
 
 #endif // !FRACTION_H
