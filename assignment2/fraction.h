@@ -2,6 +2,7 @@
 #define FRACTION_H
 
 #include <iostream>
+#include"string.h"
 class Fraction {
 private:
   int numerator;
@@ -58,12 +59,14 @@ public:
   Fraction operator=(Fraction f) {
     this->numerator = f.numerator;
     this->denominator = f.denominator;
+    memcpy(this->values,f.values,10);
 
-    this->values = new int[10];
 
-    for (int index = 0; index < 10; index++) {
-      this->values[index] = f.values[index];
-    }
+    // this->values = new int[10];
+
+    // for (int index = 0; index < 10; index++) {
+    //   this->values[index] = f.values[index];
+    // }
     return *this;
   }
   /*
